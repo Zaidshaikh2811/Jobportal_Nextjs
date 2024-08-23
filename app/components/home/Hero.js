@@ -11,7 +11,7 @@ export default function Hero() {
 
 
                     <FlipWordsDemo></FlipWordsDemo>
-                    <div className="mt-[1.5rem]">
+                    <div className="mt-[1.5rem] mx-auto">
                         <input type="text" placeholder="Search Job" className="w-[60%]
                          md:w-[70%] lg:w-[75%] px-5 py-4 outline-none
                           rounded-l-md bg-gray-200"/>

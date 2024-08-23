@@ -6,7 +6,7 @@ export function FlipWordsDemo() {
 
     return (
         <div className="text-center">
-            <h1 className="text-[23px] sm:text-[30px] lg:text-[40px] xl:text-[60px] leading-[3rem] lg:leading-[4rem] font-extrabold">
+            <h1 className="text-[40px] sm:text-[45px] lg:text-[50px] xl:text-[60px] leading-[3rem] lg:leading-[4rem] font-extrabold">
                 Discover  <span ><FlipWords className="text-blue-500" words={words} /></span> <br />
                 and Elevate Your Career
             </h1>
