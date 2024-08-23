@@ -1,0 +1,12 @@
+
+import Home from "./components/home/Home";
+import JobCategory from "./components/home/JobCategory";
+
+export default function DashBoard() {
+  return (
+    <>
+      <Home />
+      <JobCategory></JobCategory>
+    </>
+  );
+}
