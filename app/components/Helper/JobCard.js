@@ -1,57 +1,64 @@
 import Image from "next/image";
 import { FollowerPointerCard } from "@/components/ui/following-pointer";
+import Link from "next/link";
 
 export function FollowingPointerDemo() {
     return (
         <div className="w-80 mx-auto">
-            <FollowerPointerCard
-                title={
-                    <TitleComponent
-                        title={blogContent.author}
-                        avatar={blogContent.authorAvatar}
-                    />
-                }
-            >
-                <div className="relative overflow-hidden h-full rounded-2xl transition duration-200 group bg-white hover:shadow-xl border border-zinc-100">
-                    <div className="w-full aspect-w-16 aspect-h-10 bg-gray-100 rounded-tr-lg rounded-tl-lg overflow-hidden xl:aspect-w-16 xl:aspect-h-10 relative">
-                        <Image
-                            src={blogContent.image}
-                            alt="thumbnail"
-                            layout="fill"
-                            objectFit="cover"
-                            className={`group-hover:scale-95 group-hover:rounded-2xl transform object-cover transition duration-200 `}
-                        />
-                    </div>
-                    <div className=" p-4">
-                        <h2 className="font-bold my-4 text-lg text-zinc-700">
-                            {blogContent.title}
-                        </h2>
-                        <h2 className="font-normal my-4 text-sm text-zinc-500">
-                            {blogContent.description}
-                        </h2>
-                        <div className="flex flex-row justify-between items-center mt-10">
-                            <span className="text-sm text-gray-500">{blogContent.date}</span>
-                            <div className="relative z-10 px-6 py-2 bg-black text-white font-bold rounded-xl block text-xs">
-                                Read More
+            {
+                blogContent.map((item, index) => {
+                    return <FollowerPointerCard key={index}>
+                        <div className="relative overflow-hidden h-full rounded-2xl transition duration-300 group bg-white hover:shadow-2xl border border-gray-200">
+                            <div className="p-6">
+                                <h2 className="font-extrabold text-xl text-gray-900 mb-3">
+                                    {item.title}
+                                </h2>
+                                <h3 className="text-base text-gray-800 mb-3">
+                                    Role: <span className="font-semibold text-gray-900">{item.role}</span>
+                                </h3>
+                                <h4 className="text-base text-gray-800 mb-5">
+                                    Pay: <span className="font-semibold text-gray-900">{item.pay}</span>
+                                </h4>
+                                <p className="text-sm text-gray-600 mb-8 leading-relaxed">
+                                    {item.description}
+                                </p>
+                                <div className="flex justify-between items-center">
+                                    <div>
+                                        <p className="text-xs text-gray-500">{item.place}</p>
+                                        <p className="text-xs text-gray-500">{item.date}</p>
+                                    </div>
+                                    <div className="px-5 py-2 bg-blue-600 text-white font-medium rounded-lg text-xs shadow-md hover:bg-blue-700 transition-all duration-200">
+                                        <Link href={`/jobs`} passHref>
+                                            Read More
+                                        </Link>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </FollowerPointerCard>
+                    </FollowerPointerCard>
+
+
+
+                })
+            }
+
         </div>
     );
 }
 
-const blogContent = {
+const blogContent = [{
     slug: "amazing-tailwindcss-grid-layouts",
     author: "Manu Arora",
+    role: "developer",
+    pay: "50000",
     date: "28th March, 2023",
     title: "Amazing Tailwindcss Grid Layout Examples",
     description:
         "Grids are cool, but Tailwindcss grids are cooler. In this article, we will learn how to create amazing Grid layouts with Tailwindcs grid and React.",
     image: "/demo/thumbnail.png",
+    place: "banglore",
     authorAvatar: "/manu.png",
-};
+}];
 
 const TitleComponent = ({
     title,

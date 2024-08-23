@@ -7,6 +7,6 @@ export default function JobCategory() {
         <Heading mainHeading="Popular job JobCategory"
             subHeading="202 job live -294 addded today"></Heading>
         <CardHoverEffectDemo></CardHoverEffectDemo>
-        <FeatureJobs></FeatureJobs>
+
     </div>
 }

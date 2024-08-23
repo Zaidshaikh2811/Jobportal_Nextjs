@@ -1,4 +1,5 @@
 
+import FeatureJobs from "./components/home/FeatureJobs";
 import Home from "./components/home/Home";
 import JobCategory from "./components/home/JobCategory";
 
@@ -7,6 +8,7 @@ export default function DashBoard() {
     <>
       <Home />
       <JobCategory></JobCategory>
+      <FeatureJobs />
     </>
   );
 }
