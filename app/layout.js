@@ -3,7 +3,8 @@ import "./globals.css";
 import Nav from "./components/home/Nav";
 import Footer from "./components/home/Footer";
 import ScrollTop from "./components/Helper/ScrollTop";
-
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -20,6 +21,7 @@ export default function RootLayout({ children }) {
         <link rel="icon" href="https://res.cloudinary.com/dhyczd7jv/image/upload/v1724141722/Jobster_Logo_eghwyb.png" />
       </head>
       <body className={inter.className}>
+        <ToastContainer />
         <Nav>
         </Nav>
 

@@ -9,6 +9,7 @@ import User from "../Helper/User";
 
 export default async function Nav() {
     const session = await getServerSession(authOptions)
+    
     return (<div className="h-[13vh] overflow-hidden shadow-md  flex items-center">
         <div className="w-[90%] md:w-[80%] mx-auto flex items-center justify-between">
             <div className="w-[150px]  md:w-[250px] lg:[250px]">

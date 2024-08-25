@@ -2,15 +2,20 @@
 import React, { useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { cn } from "@/lib/utils";
+import { useRouter } from 'next/navigation';
 import {
     IconBrandGithub,
     IconBrandGoogle,
-    IconBrandOnlyfans,
+
 } from "@tabler/icons-react";
 import { signIn } from "next-auth/react";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 export default function AuthFormDemo() {
+    const router = useRouter();
+
+    const [loading, setLoading] = useState(false); // State for loading
     const [isSignup, setIsSignup] = useState(true); // State to toggle between login and signup
     const [formData, setFormData] = useState({
         firstname: "",
@@ -44,14 +49,34 @@ export default function AuthFormDemo() {
         return newErrors;
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const validationErrors = validateForm();
         if (Object.keys(validationErrors).length > 0) {
             setErrors(validationErrors);
         } else {
-            console.log("Form submitted", formData);
-            setErrors({});
+            setLoading(true); // Set loading to true
+            try {
+                if (isSignup) {
+                    const signupData = {
+                        name: `${formData.firstname} ${formData.lastname}`,
+                        email: formData.email,
+                        password: formData.password
+                    };
+                    await axios.post('http://localhost:3000/api/signup', signupData);
+                    toast.success("Signup successful!");
+                } else {
+                    await axios.post('http://localhost:3000/api/login', { email: formData.email, password: formData.password });
+                    toast.success("Login successful!");
+                }
+                router.push('/'); // Navigate to home on success
+            } catch (error) {
+                console.error(error);
+                toast.error(isSignup ? "Signup failed. Please try again." : "Login failed. Please check your credentials.");
+            } finally {
+                setLoading(false); // Set loading to false
+                setErrors({});
+            }
         }
     };
 
@@ -134,9 +159,18 @@ export default function AuthFormDemo() {
                 <button
                     className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset] mt-4"
                     type="submit"
+                    disabled={loading}
                 >
-                    {isSignup ? "Sign up" : "Login"} &rarr;
-                    <BottomGradient />
+                    {loading ? "Processing..." : `${isSignup ? "Sign up" : "Login"} →`}
+                    {loading ? (
+                        <div className="absolute inset-0 flex items-center justify-center">
+                            <div className="spinner-border" role="status">
+                                <span className="sr-only">Loading...</span>
+                            </div>
+                        </div>
+                    ) : (
+                        <BottomGradient />
+                    )}
                 </button>
 
                 <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />

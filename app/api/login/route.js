@@ -1,5 +1,5 @@
 import { connect } from '@/app/api/dbConfig/dbConfig'
-import User from '@/app/components/Helper/User'
+import User from '../models/userModel'
 import { NextRequest, NextResponse } from 'next/server'
 import bcryptjs from 'bcryptjs'
 import jwt from 'jsonwebtoken'
@@ -7,10 +7,12 @@ import jwt from 'jsonwebtoken'
 
 connect()
 
-export default async function GET(req) {
+export async function POST(request) {
     try {
 
         const reqBody = await request.json()
+
+
         const { email, password } = reqBody
 
         const user = await User.findOne({ email })

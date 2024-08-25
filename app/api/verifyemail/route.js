@@ -12,8 +12,9 @@ export async function POST(request) {
         const { token } = reqBody
         if (!token) {
             return NextResponse.json({
-                status: false,
+
                 message: 'Token Not Found',
+                success: false
             })
         }
 
@@ -26,6 +27,7 @@ export async function POST(request) {
             return NextResponse.json({
                 status: 400,
                 message: 'No User Found',
+                success: false
             })
         }
 
@@ -46,7 +48,8 @@ export async function POST(request) {
     catch (error) {
         return NextResponse.json({
             status: 500,
-            message: error.message
+            message: error.message,
+            success: false
 
         })
     }
