@@ -35,7 +35,8 @@ export default function FeatureJobs() {
             try {
                 console.log("fetching");
 
-                const response = await axios.get('http://localhost:3000/api/jobs/featuredjobs');
+                // const response = await axios.get('http://localhost:3000/api/jobs/featuredjobs');
+                const response = await axios.get('/api/jobs/featuredjobs');
 
 
 
