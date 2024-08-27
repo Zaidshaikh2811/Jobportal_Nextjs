@@ -30,8 +30,20 @@ export async function POST(request) {
                 message: `Missing required fields: ${missingFields.join(', ')}`
             });
         }
+        let slug = slugify(reqBody.jobTitle, { lower: true });
+        let existingJob = await Jobs.findOne({ slug });
+
+        // Ensure slug is unique
+        let counter = 1;
+        while (existingJob) {
+            slug = `${slugify(reqBody.jobTitle, { lower: true })}-${counter}`;
+            existingJob = await Jobs.findOne({ slug });
+            counter++;
+        }
+
         // Create a new job instance
-        const newJob = new Jobs(reqBody);
+        const newJob = new Jobs({ ...reqBody, slug });
+
 
 
         // Save the job to the database

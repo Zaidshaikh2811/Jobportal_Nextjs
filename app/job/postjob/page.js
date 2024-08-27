@@ -4,8 +4,10 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { revalidatePath } from 'next/cache';
+import { useRouter } from 'next/navigation';
 
 export default function PostJob() {
+    const router = useRouter();
     const [formData, setFormData] = useState({
         jobType: [],
         jobTitle: '',
@@ -24,6 +26,8 @@ export default function PostJob() {
         location2: '',
         image: null,
     });
+
+
     const handleChange = (e) => {
         const { id, value, type, checked } = e.target;
 
@@ -94,7 +98,7 @@ export default function PostJob() {
 
 
             alert(response.data.message); // Show success message
-            // revalidatePath("/")
+
             setFormData({
                 jobType: [],
                 jobTitle: '',
@@ -112,7 +116,11 @@ export default function PostJob() {
                 deadline: '',
                 location2: '',
                 image: null,
-            }); // Reset form
+            });
+            revalidatePath('/')
+            router.push('/')
+
+
         } catch (error) {
             console.error('Error posting job:', error);
             alert('Failed to post job. Please try again.');

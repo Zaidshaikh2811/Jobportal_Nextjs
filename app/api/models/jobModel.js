@@ -59,7 +59,8 @@ const jobSchema = new mongoose.Schema({
     },
     image: {
         type: String // Store the URL or identifier of the image
-    }
+    },
+    slug: { type: String, unique: true, required: true },
 }, { timestamps: true });
 
 const Jobs = mongoose.models.jobs || mongoose.model("jobs", jobSchema)
