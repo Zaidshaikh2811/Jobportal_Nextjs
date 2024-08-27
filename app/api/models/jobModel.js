@@ -1,7 +1,20 @@
 import mongoose from "mongoose"
 
-const jobModel = mongoose.Schema({
-    title: {
+
+const jobSchema = new mongoose.Schema({
+    jobType: {
+        type: [String], // Array of strings for the type field
+        default: []
+    },
+    jobTitle: {
+        type: String,
+        required: true
+    },
+    companyName: {
+        type: String,
+        required: true
+    },
+    location: {
         type: String,
         required: true
     },
@@ -10,24 +23,45 @@ const jobModel = mongoose.Schema({
         required: true
     },
     salary: {
-        type: Number,
-        required: true
+        type: String
     },
-    location: {
+    category: {
         type: String,
-        required: true
+        required: true,
+        enum: ['Development', 'Marketing', 'Design', 'Finance', 'Human Resources', 'Automotive Jobs', 'Customer Services', 'Health and Care', 'Project Management'], // Enum to restrict to specific values
+        trim: true
     },
-    company: {
+    careerLevel: {
         type: String,
-        required: true
+        required: true,
+        enum: ['Entry Level', 'Mid Level', 'Senior Level', 'Managerial Level', 'Executive Level'], // Enum to restrict to specific values
+        trim: true
+    }, phone: {
+        type: String
     },
-    date: {
-        type: Date,
-        default: Date.now
+    qualification: {
+        type: String
+    },
+    gender: {
+        type: String
+    },
+    experience: {
+        type: String
+    },
+    address: {
+        type: String
+    },
+    deadline: {
+        type: Date
+    },
+    location2: {
+        type: String
+    },
+    image: {
+        type: String // Store the URL or identifier of the image
     }
+}, { timestamps: true });
 
-})
-
-const Jobs = mongoose.models.jobs || mongoose.model("jobs", jobModel)
+const Jobs = mongoose.models.jobs || mongoose.model("jobs", jobSchema)
 
 export default Jobs;

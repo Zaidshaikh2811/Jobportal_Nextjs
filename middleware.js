@@ -1,28 +1,38 @@
-import { NextResponse } from 'next/server'
+import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
+import { NextResponse } from 'next/server';
 
-// This function can be marked `async` if using `await` inside
-export function middleware(request) {
-    const { pathname } = request.nextUrl;
+const isPublicRoute = createRouteMatcher([
+    "/signup",
+    "/verifyemail",
+    "/",
+    "",
+    "/about",         // Add any other public routes
+    "/blog/(.*)",     // Dynamic public routes (e.g., blog post pages)
+    "/contact",
+]);
 
+// export default clerkMiddleware((auth, req) => {
+//     const { userId } = auth();
+//     const currentUrl = new URL(req.url);
 
-    const token = request.cookies.get("token")?.value || '';
-    const isPublicPath = pathname === '/signup' || pathname === '/verifyemail' || '/';
+//     const isHomePage = currentUrl.pathname === "/" || "";
 
-    if (isPublicPath && token) {
-        // Redirect to the home page if the user is already authenticated
-        return NextResponse.redirect(new URL('/', request.url));
-    }
+//     if (userId && isHomePage) {
+//         return NextResponse.redirect(new URL("/", req.url)); // Redirect authenticated users to a dashboard or any other page
+//     }
 
-    if (!isPublicPath && !token) {
-        // Redirect to the signup page if the user is not authenticated and trying to access a protected route
-        return NextResponse.redirect(new URL('/signup', request.url));
-    }
+//     if (!userId && !isPublicRoute(req)) {
+//         return NextResponse.redirect(new URL("/signup", req.url)); // Redirect to signup if trying to access protected route
+//     }
 
-    // Continue to the requested page if all checks pass
-    return NextResponse.next();
-}
+//     return NextResponse.next();
+// })
 
-// See "Matching Paths" below to learn more
+export default clerkMiddleware()
+
 export const config = {
-    matcher: ['/', '/signup', '/verifyemail'], // Add any additional paths you want to protect
-};
+    matcher: [
+        "/((?!.*\\..*|_next).*)",  // Exclude files with extensions and _next
+        "/"
+    ],
+}

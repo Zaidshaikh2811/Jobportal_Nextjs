@@ -8,9 +8,7 @@ import jwt from 'jsonwebtoken'
 connect()
 
 export async function POST(request) {
-    res.setHeader('Access-Control-Allow-Origin', 'https://jobportal-nextjs-xdf3.vercel.app');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
     try {
 
         const reqBody = await request.json()

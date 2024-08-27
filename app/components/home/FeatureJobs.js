@@ -1,16 +1,82 @@
+"use client"
+
 import Link from "next/link";
 import Heading from "../Helper/Heading";
-import { FollowingPointerDemo } from "../Helper/JobCard";
+import { ExpandableCardDemo } from "../ExpandableCardDemo";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
+
 
 export default function FeatureJobs() {
+
+
+
+
+    const [jobs, setJobs] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    function SkeletonLoader() {
+        return (
+            <div className="animate-pulse">
+                <div className="p-4 flex flex-col md:flex-row justify-between items-center bg-neutral-100 dark:bg-neutral-800 rounded-xl">
+                    <div className="flex gap-4 flex-col md:flex-row w-full">
+                        <div className="h-6 bg-gray-300 dark:bg-neutral-700 w-1/2 rounded"></div>
+                        <div className="h-6 bg-gray-300 dark:bg-neutral-700 w-1/3 rounded"></div>
+                        <div className="h-6 bg-gray-300 dark:bg-neutral-700 w-1/4 rounded"></div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+    useEffect(() => {
+        // Fetch featured jobs from the API
+        const fetchFeaturedJobs = async () => {
+            try {
+                console.log("fetching");
+
+                const response = await axios.get('http://localhost:3000/api/jobs/featuredjobs');
+                console.log(response);
+
+
+                if (!response.data.success) {
+                    toast.error("Something Went Wrong")
+                    throw new Error('Network response was not ok');
+                }
+
+
+                setJobs(response.data.jobs || []); // Adjust based on the actual response structure
+            } catch (error) {
+                console.error('Failed to fetch featured jobs:', error);
+            } finally {
+                setLoading(false); // Set loading to false after fetching
+            }
+        };
+
+        fetchFeaturedJobs();
+    }, []);
+
+    const tempData = [{
+        "id": 1,
+        "title": "Software Engineer",
+        "company": "Tech Corp",
+        "location": "New York, NY",
+        "description": "Join our team to work on cutting-edge projects...",
+        "applyLink": "https://techcorp.com/apply"
+    }]
+
     return <div className="pt-20 pb-12">
         <Heading
             mainHeading="Featured Job Opportunities"
             subHeading="Discover your potential and enhance your career with our curated job listings. Find the right position that matches your skills and aspirations."
         />
-        <div className="mt-12 w-[90%] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <FollowingPointerDemo></FollowingPointerDemo>
-
+        <div className="mt-12 w-[90%] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+            {loading ? (
+                // Render loading skeletons while fetching data
+                Array.from({ length: 4 }).map((_, index) => <SkeletonLoader key={index} />)
+            ) : (
+                jobs.map((job) => <ExpandableCardDemo job={job} key={job._id} />)
+            )}
         </div>
         <Link href="/job/alljobs" className="flex w-fit mx-auto mt-10">
 
