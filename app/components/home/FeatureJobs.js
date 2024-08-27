@@ -33,7 +33,7 @@ export default function FeatureJobs() {
         // Fetch featured jobs from the API
         const fetchFeaturedJobs = async () => {
             try {
-                console.log("fetching");
+
 
                 // const response = await axios.get('http://localhost:3000/api/jobs/featuredjobs');
                 const response = await axios.get('/api/jobs/featuredjobs');
@@ -69,7 +69,7 @@ export default function FeatureJobs() {
                 // Render loading skeletons while fetching data
                 Array.from({ length: 4 }).map((_, index) => <SkeletonLoader key={index} />)
             ) : (
-                jobs.map((job) => <ExpandableCardDemo job={job} key={job._id} />)
+                jobs.map((job, index) => <ExpandableCardDemo job={job} key={index} />)
             )}
         </div>
         <Link href="/job/alljobs" className="flex w-fit mx-auto mt-10">

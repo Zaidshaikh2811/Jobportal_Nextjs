@@ -85,13 +85,13 @@ export default function PostJob() {
             if (formData.image) {
                 imageUrl = await handleFileUpload();
             }
-            console.log(formData, imageUrl);
+
 
             const response = await axios.post('/api/jobs/addjob', {
                 ...formData,
                 image: imageUrl
             });
-            console.log(response);
+
 
             alert(response.data.message); // Show success message
             // revalidatePath("/")

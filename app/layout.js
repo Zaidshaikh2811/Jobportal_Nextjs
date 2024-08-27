@@ -6,6 +6,7 @@ import ScrollTop from "./components/Helper/ScrollTop";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { ClerkProvider } from "@clerk/nextjs";
+import ResponsiveNav from "./components/Helper/ResponsiveNav";
 
 
 
@@ -31,9 +32,10 @@ export default function RootLayout({ children }) {
 
           </header>
           <ToastContainer />
-          <Nav>
-          </Nav>
+          {/* <Nav>
+          </Nav> */}
 
+          <ResponsiveNav></ResponsiveNav>
           {children}
           <Footer></Footer>
           <ScrollTop></ScrollTop>

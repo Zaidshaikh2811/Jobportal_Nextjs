@@ -25,7 +25,7 @@ export default function VerifyEmail() {
     const verifyToken = async (token) => {
         try {
             const response = await axios.post('http://localhost:3000/api/verifyemail', { token });
-            console.log(response.data);
+
             if (!response.data.success) {
                 setError(response.data.message);
                 setLoading(false);

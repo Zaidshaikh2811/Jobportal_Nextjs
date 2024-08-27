@@ -2,6 +2,8 @@ import Image from "next/image";
 import { CiLocationOn } from "react-icons/ci";
 
 export function ExpandableCardDemo({ job }) {
+
+
     return (
         <div className="max-w-sm p-6 bg-white rounded-lg shadow-md">
             <div className="flex items-center justify-between">
