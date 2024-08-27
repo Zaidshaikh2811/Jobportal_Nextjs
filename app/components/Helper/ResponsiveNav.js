@@ -139,7 +139,7 @@ export default function ResponsiveNav() {
                             <ul>
                                 <li>
                                     <Link
-                                        className={`text-sm ${pathname === "/" ? "text-blue-600 font-bold" : "text-gray-400 hover:text-gray-500"}`}
+                                        className={`text-sm mt-4 ${pathname === "/" ? "text-blue-600 font-bold" : "text-gray-400 hover:text-gray-500"}`}
                                         href="#"
                                     >
                                         Home
@@ -147,7 +147,7 @@ export default function ResponsiveNav() {
                                 </li>
                                 <li>
                                     <Link
-                                        className={`text-sm ${pathname === "/aboutUs" ? "text-blue-600 font-bold" : "text-gray-400 hover:text-gray-500"}`}
+                                        className={`text-sm mt-4 ${pathname === "/aboutUs" ? "text-blue-600 font-bold" : "text-gray-400 hover:text-gray-500"}`}
                                         href="#"
                                     >
                                         About Us
@@ -155,15 +155,15 @@ export default function ResponsiveNav() {
                                 </li>
                                 <li>
                                     <Link
-                                        className={`text-sm ${pathname === "/job/alljobs" ? "text-blue-600 font-bold" : "text-gray-400 hover:text-gray-500"}`}
-                                        href="#"
+                                        className={`text-sm mt-4 ${pathname === "/job/alljobs" ? "text-blue-600 font-bold" : "text-gray-400 hover:text-gray-500"}`}
+                                        href="/job/alljobs"
                                     >
                                         All Jobs
                                     </Link>
                                 </li>
                                 <li>
                                     <Link
-                                        className={`text-sm ${pathname === "/job/postjob" ? "text-blue-600 font-bold" : "text-gray-400 hover:text-gray-500"}`}
+                                        className={`text-sm mt-4 ${pathname === "/job/postjob" ? "text-blue-600 font-bold" : "text-gray-400 hover:text-gray-500"}`}
                                         href="/job/postjob"
                                     >
                                         Post-Job
@@ -171,7 +171,7 @@ export default function ResponsiveNav() {
                                 </li>
                                 <li>
                                     <Link
-                                        className={`text-sm ${pathname === "/Contact" ? "text-blue-600 font-bold" : "text-gray-400 hover:text-gray-500"}`}
+                                        className={`text-sm mt-4 ${pathname === "/Contact" ? "text-blue-600 font-bold" : "text-gray-400 hover:text-gray-500"}`}
                                         href="#"
                                     >
                                         Contact
