@@ -117,7 +117,7 @@ export default function PostJob() {
                 location2: '',
                 image: null,
             });
-            revalidatePath('/')
+            revalidatePath('/job/alljobs')
             router.push('/')
 
 

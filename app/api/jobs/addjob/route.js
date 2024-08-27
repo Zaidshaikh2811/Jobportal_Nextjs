@@ -1,6 +1,7 @@
 import { connect } from '@/app/api/dbConfig/dbConfig'
 import Jobs from '../../models/jobModel'
 import { NextRequest, NextResponse } from 'next/server'
+import slugify from 'slugify';
 
 
 
@@ -32,6 +33,7 @@ export async function POST(request) {
         }
         let slug = slugify(reqBody.jobTitle, { lower: true });
         let existingJob = await Jobs.findOne({ slug });
+        console.log(slug);
 
         // Ensure slug is unique
         let counter = 1;
@@ -43,6 +45,8 @@ export async function POST(request) {
 
         // Create a new job instance
         const newJob = new Jobs({ ...reqBody, slug });
+        console.log(newJob);
+
 
 
 

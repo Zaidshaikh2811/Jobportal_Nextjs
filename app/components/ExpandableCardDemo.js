@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { CiLocationOn } from "react-icons/ci";
 
 export function ExpandableCardDemo({ job }) {
@@ -41,9 +42,11 @@ export function ExpandableCardDemo({ job }) {
                 {job.description.length > 100 ? `${job.description.substring(0, 100)}...` : job.description}
             </p>
             <div className="mt-6 flex justify-between">
-                <button className="px-6 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-500 transition duration-200">
-                    Apply
-                </button>
+                <Link href={`/job/${job.slug}`}>
+                    <button className="px-6 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-500 transition duration-200">
+                        Apply
+                    </button>
+                </Link>
                 <button className="px-6 py-2 text-gray-800 bg-white border border-gray-300 rounded-md hover:bg-gray-100 transition duration-200">
                     Contacts
                 </button>
