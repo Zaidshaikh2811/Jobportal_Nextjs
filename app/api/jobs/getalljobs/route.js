@@ -8,7 +8,7 @@ export async function GET(request) {
     try {
         const url = new URL(request.url);
         const slug = url.searchParams.get('slug'); // Get the slug parameter from the query string
-        console.log(slug);
+
 
         let jobs;
 

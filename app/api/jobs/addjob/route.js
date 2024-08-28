@@ -12,15 +12,25 @@ export async function POST(request) {
     try {
 
         const reqBody = await request.json();
+        console.log(reqBody);
 
         // Validate the required fields
         const requiredFields = [
             'jobTitle', 'companyName', 'location', 'description',
-            'jobType', 'category', 'careerLevel', 'phone',
-            'qualification', 'gender', 'experience',
-            'address', 'deadline'
+            'jobType', 'careerLevel'
         ];
-        const missingFields = requiredFields.filter(field => !reqBody[field]);
+        const missingFields = requiredFields.filter(field => {
+            if (!reqBody[field]) {
+                return true; // Field is missing
+            }
+
+            // For array fields, check if they are empty
+            if (Array.isArray(reqBody[field]) && reqBody[field].length === 0) {
+                return true; // Array field is empty
+            }
+
+            return false; // Field is present and valid
+        });
 
 
 
@@ -33,7 +43,7 @@ export async function POST(request) {
         }
         let slug = slugify(reqBody.jobTitle, { lower: true });
         let existingJob = await Jobs.findOne({ slug });
-        console.log(slug);
+
 
         // Ensure slug is unique
         let counter = 1;
@@ -45,8 +55,9 @@ export async function POST(request) {
 
         // Create a new job instance
         const newJob = new Jobs({ ...reqBody, slug });
-        console.log(newJob);
 
+
+        console.log(newJob);
 
 
 

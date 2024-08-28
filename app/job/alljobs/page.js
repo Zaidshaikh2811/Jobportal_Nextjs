@@ -12,7 +12,6 @@ export default function AllJobs() {
         const getAllJobs = async () => {
             try {
                 const responseJobs = await axios.get("/api/jobs/getalljobs");
-                console.log(responseJobs.data.jobs);
 
                 setJobs(responseJobs.data.jobs);
                 setLoading(false); // Set loading to false once data is fetched

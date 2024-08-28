@@ -1,8 +1,13 @@
 "use client";
 
 import axios from "axios";
+import Head from "next/head";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { FaMapMarkerAlt, FaCalendarAlt, FaDollarSign, FaBriefcase } from 'react-icons/fa';
+import { MdOutlineLocalHospital } from 'react-icons/md';
+
 
 export default function ParticularJob({ params }) {
     const { id } = params;
@@ -15,7 +20,7 @@ export default function ParticularJob({ params }) {
             try {
                 const response = await axios.get(`/api/jobs/getalljobs?slug=${id}`);
                 if (response.data.success) {
-                    console.log(response.data.jobs);
+
 
                     setJob(response.data.jobs);
                 } else {
@@ -40,57 +45,138 @@ export default function ParticularJob({ params }) {
     return (
         <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-10">
             {job ? (
-                <div>
-                    <h1 className="text-3xl font-bold mb-4">{job.jobTitle}</h1>
-                    <p className="text-lg mb-4">{job.description}</p>
+                // <div>
+                //     <h1 className="text-3xl font-bold mb-4">{job.jobTitle}</h1>
+                //     <p className="text-lg mb-4">{job.description}</p>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-                        <div>
-                            <p className="font-semibold">Company:</p>
-                            <p>{job.companyName}</p>
+                //     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                //         <div>
+                //             <p className="font-semibold">Company:</p>
+                //             <p>{job.companyName}</p>
+                //         </div>
+                //         <div>
+                //             <p className="font-semibold">Location:</p>
+                //             <p>{job.location}</p>
+                //         </div>
+                //         <div>
+                //             <p className="font-semibold">Job Type:</p>
+                //             <p>{job.jobType.join(', ')}</p>
+                //         </div>
+                //         <div>
+                //             <p className="font-semibold">Salary:</p>
+                //             <p>{job.salary}</p>
+                //         </div>
+                //         <div>
+                //             <p className="font-semibold">Experience Required:</p>
+                //             <p>{job.experience} years</p>
+                //         </div>
+                //         <div>
+                //             <p className="font-semibold">Qualification:</p>
+                //             <p>{job.qualification}</p>
+                //         </div>
+                //         <div>
+                //             <p className="font-semibold">Gender:</p>
+                //             <p>{job.gender}</p>
+                //         </div>
+                //         <div>
+                //             <p className="font-semibold">Career Level:</p>
+                //             <p>{job.careerLevel}</p>
+                //         </div>
+                //         <div>
+                //             <p className="font-semibold">Deadline:</p>
+                //             <p>{new Date(job.deadline).toLocaleDateString()}</p>
+                //         </div>
+                //         <div>
+                //             <p className="font-semibold">Contact:</p>
+                //             <p>{job.phone}</p>
+                //         </div>
+                //     </div>
+
+                //     <button className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-300">
+                //         Apply Now
+                //     </button>
+                // </div>
+                <>
+
+                    <Head>
+                        <title>UI/UX Designer Job Posting</title>
+                    </Head>
+                    <div className="max-w-4xl mx-auto p-6 bg-gray-50 rounded-lg shadow-md mt-10">
+                        {/* Job Title and Company Info */}
+                        <div className="flex justify-between items-center mb-6">
+                            <div>
+                                <h1 className="text-4xl font-bold text-gray-800">UI/UX Designer</h1>
+                                <div className="text-lg text-gray-600">Google</div>
+                            </div>
+                            <img src="/google-logo.png" alt="Google Logo" className="w-20 h-20" />
                         </div>
-                        <div>
-                            <p className="font-semibold">Location:</p>
-                            <p>{job.location}</p>
+
+                        {/* Location, Posted Date, Salary, and Benefits */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                            <div className="flex items-center text-gray-700">
+                                <FaMapMarkerAlt className="w-6 h-6 mr-2 text-blue-600" />
+                                Mountain View, CA
+                            </div>
+                            <div className="flex items-center text-gray-700">
+                                <FaCalendarAlt className="w-6 h-6 mr-2 text-blue-600" />
+                                Posted 5 days ago
+                            </div>
+                            <div className="flex items-center text-gray-700">
+                                <FaDollarSign className="w-6 h-6 mr-2 text-blue-600" />
+                                $100,000 to $200,000 Annually
+                            </div>
+                            <div className="flex items-center text-gray-700">
+                                <MdOutlineLocalHospital className="w-6 h-6 mr-2 text-blue-600" />
+                                Vision Medical Life Dental 401K
+                            </div>
                         </div>
-                        <div>
-                            <p className="font-semibold">Job Type:</p>
-                            <p>{job.jobType.join(', ')}</p>
+
+                        {/* About the Role */}
+                        <div className="bg-white p-6 rounded-lg shadow-lg mb-6">
+                            <h2 className="text-2xl font-semibold text-gray-800 mb-4">About the business and the role</h2>
+                            <p className="text-gray-700 mb-4">
+                                A well-established software company is currently redesigning its products and working towards consistently developing their software to always be ahead. They deliver high-quality HRIS systems both here in Australia and the US.
+                            </p>
+                            <p className="text-gray-700">
+                                This re-design and exciting new vision has created the need for a brand new UI/UX Designer to assist in improving and designing a forward-thinking Front End experience for the user.
+                            </p>
                         </div>
-                        <div>
-                            <p className="font-semibold">Salary:</p>
-                            <p>{job.salary}</p>
+
+                        {/* Job Tasks and Responsibilities */}
+                        <div className="bg-white p-6 rounded-lg shadow-lg mb-6">
+                            <h2 className="text-2xl font-semibold text-gray-800 mb-4">Job tasks and responsibilities</h2>
+                            <p className="text-gray-700 mb-4">
+                                As the UI/UX Designer, you will act as the creative and user translator for the rest of the team. You will be collaborating and working closely with the Product Manager and the development teams and the clients to ensure the front end is always easy to use and ahead of the game.
+                            </p>
+                            <p className="text-gray-700">
+                                As the UX lead, you will be required to present to both internal and external stakeholders, to ensure all concepts, designs, and changes are presented clearly. Research must be completed thoroughly and utilize customer knowledge and insights as well as market trends.
+                            </p>
                         </div>
-                        <div>
-                            <p className="font-semibold">Experience Required:</p>
-                            <p>{job.experience} years</p>
+
+                        {/* Skills and Experience */}
+                        <div className="bg-white p-6 rounded-lg shadow-lg mb-6">
+                            <h2 className="text-2xl font-semibold text-gray-800 mb-4">Skills and experience</h2>
+                            <ul className="list-disc list-inside text-gray-700 mb-4 space-y-2">
+                                <li>Must have strong knowledge of contemporary framework</li>
+                                <li>Must have proven design capabilities</li>
+                                <li>Must be an engaging and capable demonstrator and presenter</li>
+                                <li>Team player and possess the ability to multi-task</li>
+                                <li>Ideally you will have worked with Government and Education Client</li>
+                                <li>Road mapping experience a must</li>
+                            </ul>
+                            <p className="text-gray-700">
+                                All of the above is crucial for you to be able to succeed in this role, however, we are looking for someone who has the energy and passion to bring together new ideas and a developing team.
+                            </p>
                         </div>
-                        <div>
-                            <p className="font-semibold">Qualification:</p>
-                            <p>{job.qualification}</p>
-                        </div>
-                        <div>
-                            <p className="font-semibold">Gender:</p>
-                            <p>{job.gender}</p>
-                        </div>
-                        <div>
-                            <p className="font-semibold">Career Level:</p>
-                            <p>{job.careerLevel}</p>
-                        </div>
-                        <div>
-                            <p className="font-semibold">Deadline:</p>
-                            <p>{new Date(job.deadline).toLocaleDateString()}</p>
-                        </div>
-                        <div>
-                            <p className="font-semibold">Contact:</p>
-                            <p>{job.phone}</p>
+
+                        {/* Apply Now Button */}
+                        <div className="text-center">
+                            <button className="w-full md:w-1/3 py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition duration-300">
+                                Apply Now
+                            </button>
                         </div>
                     </div>
-
-                    <button className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-300">
-                        Apply Now
-                    </button>
-                </div>
+                </>
             ) : (
                 <p className="text-gray-500">Job not found.</p>
             )}
