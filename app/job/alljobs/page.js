@@ -24,9 +24,9 @@ export default function AllJobs() {
         getAllJobs();
     }, []);
 
-    if (loading) {
-        return <p>Loading....</p>;
-    }
+    if (loading) return <div className=" container">
+        <div className="loader"></div>
+    </div>;
 
     return (
         <div className="mt-12 w-[80%] mx-auto mb-12">

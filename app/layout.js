@@ -32,8 +32,7 @@ export default function RootLayout({ children }) {
 
           </header>
           <ToastContainer />
-          {/* <Nav>
-          </Nav> */}
+
 
           <ResponsiveNav></ResponsiveNav>
           {children}

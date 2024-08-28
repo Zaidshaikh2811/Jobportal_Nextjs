@@ -5,6 +5,9 @@ import { useState } from 'react';
 import axios from 'axios';
 import { revalidatePath } from 'next/cache';
 import { useRouter } from 'next/navigation';
+import FormField from '@/app/components/Helper/FormField';
+import CheckboxGroup from '@/app/components/Helper/CheckboxGroup';
+import FileUpload from '@/app/components/Helper/FileUpload';
 
 export default function PostJob() {
     const router = useRouter();
@@ -117,7 +120,7 @@ export default function PostJob() {
                 location2: '',
                 image: null,
             });
-            revalidatePath('/job/alljobs')
+
             router.push('/')
 
 
@@ -129,261 +132,289 @@ export default function PostJob() {
 
 
     return (
+        // <div className="min-h-screen bg-gray-100 p-6 flex items-center justify-center">
+        //     <div className="bg-white p-8 rounded-lg shadow-lg max-w-[90%] w-full">
+        //         <h1 className="text-2xl font-bold mb-6 text-gray-800">Post a Job</h1>
+        //         <form onSubmit={handleSubmit}>
+        //             {/* Job Title */}
+        //             <div className="mb-4">
+        //                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="jobTitle">
+        //                     Job Title
+        //                 </label>
+        //                 <input
+        //                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        //                     id="jobTitle"
+        //                     type="text"
+        //                     placeholder="Enter job title"
+        //                     value={formData.jobTitle}
+        //                     onChange={handleChange}
+        //                 />
+        //             </div>
+
+        //             {/* Company Name */}
+        //             <div className="mb-4">
+        //                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="companyName">
+        //                     Company Name
+        //                 </label>
+        //                 <input
+        //                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        //                     id="companyName"
+        //                     type="text"
+        //                     placeholder="Enter company name"
+        //                     value={formData.companyName}
+        //                     onChange={handleChange}
+        //                 />
+        //             </div>
+
+        //             {/* Location */}
+        //             <div className="mb-4">
+        //                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="location">
+        //                     Location
+        //                 </label>
+        //                 <input
+        //                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        //                     id="location"
+        //                     type="text"
+        //                     placeholder="Enter location"
+        //                     value={formData.location}
+        //                     onChange={handleChange}
+        //                 />
+        //             </div>
+
+        //             {/* Job Description */}
+        //             <div className="mb-4">
+        //                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
+        //                     Job Description
+        //                 </label>
+        //                 <textarea
+        //                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        //                     id="description"
+        //                     placeholder="Enter job description"
+        //                     rows="5"
+        //                     value={formData.description}
+        //                     onChange={handleChange}
+        //                 />
+        //             </div>
+
+        //             {/* Salary */}
+        //             <div className="mb-6">
+        //                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="salary">
+        //                     Salary (Optional)
+        //                 </label>
+        //                 <input
+        //                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        //                     id="salary"
+        //                     type="text"
+        //                     placeholder="Enter salary range"
+        //                     value={formData.salary}
+        //                     onChange={handleChange}
+        //                 />
+        //             </div>
+
+        //             {/* Job Type */}
+
+
+
+        //             <div className="mb-4">
+        //                 <label className="block text-gray-700 text-sm font-bold mb-2">
+        //                     Type
+        //                 </label>
+        //                 {["Full-Time", "Part-Time", "Contract", "Freelance", "Internship"].map((jobType) => (
+        //                     <div key={jobType}>
+        //                         <label className="inline-flex items-center">
+        //                             <input
+        //                                 type="checkbox"
+        //                                 className="form-checkbox"
+        //                                 id={jobType}
+        //                                 value={jobType}
+        //                                 checked={formData.jobType.includes(jobType)}
+        //                                 onChange={handleChange}
+        //                             />
+        //                             <span className="ml-2">{jobType}</span>
+        //                         </label>
+        //                     </div>
+        //                 ))}
+        //             </div>
+
+
+        //             {/* Career Level */}
+        //             <div className="mb-4">
+        //                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="careerLevel">
+        //                     Career Level
+        //                 </label>
+        //                 <select
+        //                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        //                     id="careerLevel"
+        //                     value={formData.careerLevel}
+        //                     onChange={handleChange}
+        //                 >
+        //                     <option value="Entry Level">Entry Level</option>
+        //                     <option value="Mid Level">Mid Level</option>
+        //                     <option value="Senior Level">Senior Level</option>
+        //                     <option value="Managerial Level">Managerial Level</option>
+        //                     <option value="Executive Level">Executive Level</option>
+        //                 </select>
+        //             </div>
+
+        //             {/* Phone Number */}
+        //             <div className="mb-4">
+        //                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="phone">
+        //                     Phone Number
+        //                 </label>
+        //                 <input
+        //                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        //                     id="phone"
+        //                     type="text"
+        //                     placeholder="Enter phone number"
+        //                     value={formData.phone}
+        //                     onChange={handleChange}
+        //                 />
+        //             </div>
+
+        //             {/* Qualification */}
+        //             <div className="mb-4">
+        //                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="qualification">
+        //                     Qualification
+        //                 </label>
+        //                 <input
+        //                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        //                     id="qualification"
+        //                     type="text"
+        //                     placeholder="Enter qualification"
+        //                     value={formData.qualification}
+        //                     onChange={handleChange}
+        //                 />
+        //             </div>
+
+        //             {/* Gender */}
+        //             <div className="mb-4">
+        //                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="gender">
+        //                     Gender
+        //                 </label>
+        //                 <input
+        //                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        //                     id="gender"
+        //                     type="text"
+        //                     placeholder="Enter gender"
+        //                     value={formData.gender}
+        //                     onChange={handleChange}
+        //                 />
+        //             </div>
+
+        //             {/* Experience */}
+        //             <div className="mb-4">
+        //                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="experience">
+        //                     Experience
+        //                 </label>
+        //                 <input
+        //                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        //                     id="experience"
+        //                     type="text"
+        //                     placeholder="Enter experience"
+        //                     value={formData.experience}
+        //                     onChange={handleChange}
+        //                 />
+        //             </div>
+
+        //             {/* Address */}
+        //             <div className="mb-4">
+        //                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="address">
+        //                     Address
+        //                 </label>
+        //                 <input
+        //                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        //                     id="address"
+        //                     type="text"
+        //                     placeholder="Enter address"
+        //                     value={formData.address}
+        //                     onChange={handleChange}
+        //                 />
+        //             </div>
+
+        //             {/* Application Deadline */}
+        //             <div className="mb-4">
+        //                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="deadline">
+        //                     Application Deadline
+        //                 </label>
+        //                 <input
+        //                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        //                     id="deadline"
+        //                     type="date"
+        //                     value={formData.deadline}
+        //                     onChange={handleChange}
+        //                 />
+        //             </div>
+
+        //             {/* Location 2 */}
+        //             <div className="mb-4">
+        //                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="location2">
+        //                     Secondary Location (Optional)
+        //                 </label>
+        //                 <input
+        //                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        //                     id="location2"
+        //                     type="text"
+        //                     placeholder="Enter secondary location"
+        //                     value={formData.location2}
+        //                     onChange={handleChange}
+        //                 />
+        //             </div>
+
+        //             {/* Image Upload */}
+        //             <div className="mb-4">
+        //                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="image">
+        //                     Company Logo
+        //                 </label>
+        //                 <input
+        //                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        //                     id="image"
+        //                     type="file"
+        //                     accept="image/*"
+        //                     onChange={handleFileChange}
+        //                 />
+        //             </div>
+
+        //             {/* Submit Button */}
+        //             <div className="flex items-center justify-between">
+        //                 <button
+        //                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        //                     type="submit"
+        //                 >
+        //                     Post Job
+        //                 </button>
+        //             </div>
+        //         </form>
+        //     </div>
+
+
+        // </div>
         <div className="min-h-screen bg-gray-100 p-6 flex items-center justify-center">
             <div className="bg-white p-8 rounded-lg shadow-lg max-w-[90%] w-full">
                 <h1 className="text-2xl font-bold mb-6 text-gray-800">Post a Job</h1>
                 <form onSubmit={handleSubmit}>
-                    {/* Job Title */}
-                    <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="jobTitle">
-                            Job Title
-                        </label>
-                        <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="jobTitle"
-                            type="text"
-                            placeholder="Enter job title"
-                            value={formData.jobTitle}
-                            onChange={handleChange}
-                        />
-                    </div>
+                    <FormField id="jobTitle" label="Job Title" value={formData.jobTitle} onChange={handleChange} placeholder="Enter job title" />
+                    <FormField id="companyName" label="Company Name" value={formData.companyName} onChange={handleChange} placeholder="Enter company name" />
+                    <FormField id="location" label="Location" value={formData.location} onChange={handleChange} placeholder="Enter location" />
+                    <FormField id="description" label="Job Description" value={formData.description} onChange={handleChange} placeholder="Enter job description" type="textarea" />
+                    <FormField id="salary" label="Salary (Optional)" value={formData.salary} onChange={handleChange} placeholder="Enter salary range" />
+                    <CheckboxGroup options={["Full-Time", "Part-Time", "Contract", "Freelance", "Internship"]} selectedOptions={formData.jobType} onChange={handleChange} />
+                    <FormField id="careerLevel" label="Career Level" type="select" value={formData.careerLevel} onChange={handleChange} options={["Entry Level", "Mid Level", "Senior Level", "Managerial Level", "Executive Level"]} />
+                    <FormField id="phone" label="Phone Number" value={formData.phone} onChange={handleChange} placeholder="Enter phone number" />
+                    <FormField id="qualification" label="Qualification" value={formData.qualification} onChange={handleChange} placeholder="Enter qualification" />
+                    <FormField id="gender" label="Gender" value={formData.gender} onChange={handleChange} placeholder="Enter gender" />
+                    <FormField id="experience" label="Experience" value={formData.experience} onChange={handleChange} placeholder="Enter experience" />
+                    <FormField id="address" label="Address" value={formData.address} onChange={handleChange} placeholder="Enter address" />
+                    <FormField id="deadline" label="Application Deadline" type="date" value={formData.deadline} onChange={handleChange} />
+                    <FormField id="location2" label="Secondary Location (Optional)" value={formData.location2} onChange={handleChange} placeholder="Enter secondary location" />
+                    <FileUpload id="image" label="Company Logo" onChange={handleFileChange} />
 
-                    {/* Company Name */}
-                    <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="companyName">
-                            Company Name
-                        </label>
-                        <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="companyName"
-                            type="text"
-                            placeholder="Enter company name"
-                            value={formData.companyName}
-                            onChange={handleChange}
-                        />
-                    </div>
-
-                    {/* Location */}
-                    <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="location">
-                            Location
-                        </label>
-                        <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="location"
-                            type="text"
-                            placeholder="Enter location"
-                            value={formData.location}
-                            onChange={handleChange}
-                        />
-                    </div>
-
-                    {/* Job Description */}
-                    <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
-                            Job Description
-                        </label>
-                        <textarea
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="description"
-                            placeholder="Enter job description"
-                            rows="5"
-                            value={formData.description}
-                            onChange={handleChange}
-                        />
-                    </div>
-
-                    {/* Salary */}
-                    <div className="mb-6">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="salary">
-                            Salary (Optional)
-                        </label>
-                        <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="salary"
-                            type="text"
-                            placeholder="Enter salary range"
-                            value={formData.salary}
-                            onChange={handleChange}
-                        />
-                    </div>
-
-                    {/* Job Type */}
-
-
-
-                    <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2">
-                            Type
-                        </label>
-                        {["Full-Time", "Part-Time", "Contract", "Freelance", "Internship"].map((jobType) => (
-                            <div key={jobType}>
-                                <label className="inline-flex items-center">
-                                    <input
-                                        type="checkbox"
-                                        className="form-checkbox"
-                                        id={jobType}
-                                        value={jobType}
-                                        checked={formData.jobType.includes(jobType)}
-                                        onChange={handleChange}
-                                    />
-                                    <span className="ml-2">{jobType}</span>
-                                </label>
-                            </div>
-                        ))}
-                    </div>
-
-
-                    {/* Career Level */}
-                    <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="careerLevel">
-                            Career Level
-                        </label>
-                        <select
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="careerLevel"
-                            value={formData.careerLevel}
-                            onChange={handleChange}
-                        >
-                            <option value="Entry Level">Entry Level</option>
-                            <option value="Mid Level">Mid Level</option>
-                            <option value="Senior Level">Senior Level</option>
-                            <option value="Managerial Level">Managerial Level</option>
-                            <option value="Executive Level">Executive Level</option>
-                        </select>
-                    </div>
-
-                    {/* Phone Number */}
-                    <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="phone">
-                            Phone Number
-                        </label>
-                        <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="phone"
-                            type="text"
-                            placeholder="Enter phone number"
-                            value={formData.phone}
-                            onChange={handleChange}
-                        />
-                    </div>
-
-                    {/* Qualification */}
-                    <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="qualification">
-                            Qualification
-                        </label>
-                        <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="qualification"
-                            type="text"
-                            placeholder="Enter qualification"
-                            value={formData.qualification}
-                            onChange={handleChange}
-                        />
-                    </div>
-
-                    {/* Gender */}
-                    <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="gender">
-                            Gender
-                        </label>
-                        <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="gender"
-                            type="text"
-                            placeholder="Enter gender"
-                            value={formData.gender}
-                            onChange={handleChange}
-                        />
-                    </div>
-
-                    {/* Experience */}
-                    <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="experience">
-                            Experience
-                        </label>
-                        <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="experience"
-                            type="text"
-                            placeholder="Enter experience"
-                            value={formData.experience}
-                            onChange={handleChange}
-                        />
-                    </div>
-
-                    {/* Address */}
-                    <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="address">
-                            Address
-                        </label>
-                        <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="address"
-                            type="text"
-                            placeholder="Enter address"
-                            value={formData.address}
-                            onChange={handleChange}
-                        />
-                    </div>
-
-                    {/* Application Deadline */}
-                    <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="deadline">
-                            Application Deadline
-                        </label>
-                        <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="deadline"
-                            type="date"
-                            value={formData.deadline}
-                            onChange={handleChange}
-                        />
-                    </div>
-
-                    {/* Location 2 */}
-                    <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="location2">
-                            Secondary Location (Optional)
-                        </label>
-                        <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="location2"
-                            type="text"
-                            placeholder="Enter secondary location"
-                            value={formData.location2}
-                            onChange={handleChange}
-                        />
-                    </div>
-
-                    {/* Image Upload */}
-                    <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="image">
-                            Company Logo
-                        </label>
-                        <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="image"
-                            type="file"
-                            accept="image/*"
-                            onChange={handleFileChange}
-                        />
-                    </div>
-
-                    {/* Submit Button */}
                     <div className="flex items-center justify-between">
-                        <button
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                            type="submit"
-                        >
+                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
                             Post Job
                         </button>
                     </div>
                 </form>
             </div>
-
-
         </div>
     );
 }
