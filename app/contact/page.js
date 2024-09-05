@@ -29,7 +29,7 @@ export default function ContactUs() {
         <div className="max-w-4xl mx-auto py-10 px-6 bg-gray-100 rounded-lg shadow-md mt-10">
             <h1 className="text-4xl font-bold text-center text-gray-800 mb-8">Contact Us</h1>
             <p className="text-center text-lg text-gray-600 mb-8">
-                We'd love to hear from you! Whether you have a question about our services, need assistance, or just want to give feedback, feel free to reach out. We're here to help.
+                We love to hear from you! Whether you have a question about our services, need assistance, or just want to give feedback, feel free to reach out. We're here to help.
             </p>
             <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-lg">
                 <div className="mb-4">

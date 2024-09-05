@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 
 export default function AboutUs() {
@@ -38,7 +39,7 @@ export default function AboutUs() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {/* Team Member 1 */}
                     <div className="bg-white p-6 rounded-lg shadow-lg text-center">
-                        <img
+                        <Image
                             src="https://via.placeholder.com/150"
                             alt="Team Member 1"
                             className="w-24 h-24 rounded-full mx-auto mb-4"
@@ -52,7 +53,7 @@ export default function AboutUs() {
 
                     {/* Team Member 2 */}
                     <div className="bg-white p-6 rounded-lg shadow-lg text-center">
-                        <img
+                        <Image
                             src="https://via.placeholder.com/150"
                             alt="Team Member 2"
                             className="w-24 h-24 rounded-full mx-auto mb-4"
@@ -66,7 +67,7 @@ export default function AboutUs() {
 
                     {/* Team Member 3 */}
                     <div className="bg-white p-6 rounded-lg shadow-lg text-center">
-                        <img
+                        <Image
                             src="https://via.placeholder.com/150"
                             alt="Team Member 3"
                             className="w-24 h-24 rounded-full mx-auto mb-4"
@@ -74,7 +75,7 @@ export default function AboutUs() {
                         <h3 className="text-xl font-semibold text-gray-800">Alex Johnson</h3>
                         <p className="text-gray-600">Head of Marketing</p>
                         <p className="text-sm text-gray-500 mt-2">
-                            Alex's creative strategies have helped us reach a global audience and establish a strong brand presence.
+                            Alexs creative strategies have helped us reach a global audience and establish a strong brand presence.
                         </p>
                     </div>
                 </div>
