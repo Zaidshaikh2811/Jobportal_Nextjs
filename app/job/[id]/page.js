@@ -5,9 +5,8 @@ import Head from "next/head";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { FaMapMarkerAlt, FaCalendarAlt, FaDollarSign, FaBriefcase } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaCalendarAlt, FaDollarSign } from 'react-icons/fa';
 import { MdOutlineLocalHospital } from 'react-icons/md';
-
 
 export default function ParticularJob({ params }) {
     const { id } = params;
@@ -20,14 +19,12 @@ export default function ParticularJob({ params }) {
             try {
                 const response = await axios.get(`/api/jobs/getalljobs?slug=${id}`);
                 if (response.data.success) {
-
-
                     setJob(response.data.jobs);
                 } else {
-                    setError(response.data.message);
+                    setError(response.data.message || "Job not found.");
                 }
             } catch (error) {
-                toast.error("Something went wrong");
+                toast.error("An error occurred while fetching the job.");
                 setError("An error occurred while fetching the job.");
             } finally {
                 setLoading(false);
@@ -37,93 +34,49 @@ export default function ParticularJob({ params }) {
         getJob();
     }, [id]);
 
-    if (loading) return <div className=" container">
-        <div className="loader"></div>
-    </div>;
-    if (error) return <p>Error: {error}</p>;
+    if (loading) {
+        return (
+            <div className="container">
+                <div className="loader"></div>
+            </div>
+        );
+    }
+
+    if (error) {
+        return <p className="text-red-500">Error: {error}</p>;
+    }
 
     return (
         <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-10">
             {job ? (
-                // <div>
-                //     <h1 className="text-3xl font-bold mb-4">{job.jobTitle}</h1>
-                //     <p className="text-lg mb-4">{job.description}</p>
-
-                //     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-                //         <div>
-                //             <p className="font-semibold">Company:</p>
-                //             <p>{job.companyName}</p>
-                //         </div>
-                //         <div>
-                //             <p className="font-semibold">Location:</p>
-                //             <p>{job.location}</p>
-                //         </div>
-                //         <div>
-                //             <p className="font-semibold">Job Type:</p>
-                //             <p>{job.jobType.join(', ')}</p>
-                //         </div>
-                //         <div>
-                //             <p className="font-semibold">Salary:</p>
-                //             <p>{job.salary}</p>
-                //         </div>
-                //         <div>
-                //             <p className="font-semibold">Experience Required:</p>
-                //             <p>{job.experience} years</p>
-                //         </div>
-                //         <div>
-                //             <p className="font-semibold">Qualification:</p>
-                //             <p>{job.qualification}</p>
-                //         </div>
-                //         <div>
-                //             <p className="font-semibold">Gender:</p>
-                //             <p>{job.gender}</p>
-                //         </div>
-                //         <div>
-                //             <p className="font-semibold">Career Level:</p>
-                //             <p>{job.careerLevel}</p>
-                //         </div>
-                //         <div>
-                //             <p className="font-semibold">Deadline:</p>
-                //             <p>{new Date(job.deadline).toLocaleDateString()}</p>
-                //         </div>
-                //         <div>
-                //             <p className="font-semibold">Contact:</p>
-                //             <p>{job.phone}</p>
-                //         </div>
-                //     </div>
-
-                //     <button className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-300">
-                //         Apply Now
-                //     </button>
-                // </div>
                 <>
-
                     <Head>
-                        <title>UI/UX Designer Job Posting</title>
+                        <title>{`${job.jobTitle} Job Posting`}</title>
                     </Head>
+
                     <div className="max-w-4xl mx-auto p-6 bg-gray-50 rounded-lg shadow-md mt-10">
                         {/* Job Title and Company Info */}
                         <div className="flex justify-between items-center mb-6">
                             <div>
-                                <h1 className="text-4xl font-bold text-gray-800">UI/UX Designer</h1>
-                                <div className="text-lg text-gray-600">Google</div>
+                                <h1 className="text-4xl font-bold text-gray-800">{job.jobTitle}</h1>
+                                <div className="text-lg text-gray-600">{job.companyName}</div>
                             </div>
-                            <img src="/google-logo.png" alt="Google Logo" className="w-20 h-20" />
+                            <Image src="/google-logo.png" alt="Google Logo" width={80} height={80} />
                         </div>
 
                         {/* Location, Posted Date, Salary, and Benefits */}
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
                             <div className="flex items-center text-gray-700">
                                 <FaMapMarkerAlt className="w-6 h-6 mr-2 text-blue-600" />
-                                Mountain View, CA
+                                {job.location}
                             </div>
                             <div className="flex items-center text-gray-700">
                                 <FaCalendarAlt className="w-6 h-6 mr-2 text-blue-600" />
-                                Posted 5 days ago
+                                {`Posted ${new Date().getDate() - new Date(job.postedDate).getDate()} days ago`}
                             </div>
                             <div className="flex items-center text-gray-700">
                                 <FaDollarSign className="w-6 h-6 mr-2 text-blue-600" />
-                                $100,000 to $200,000 Annually
+                                {job.salary}
                             </div>
                             <div className="flex items-center text-gray-700">
                                 <MdOutlineLocalHospital className="w-6 h-6 mr-2 text-blue-600" />
@@ -134,9 +87,7 @@ export default function ParticularJob({ params }) {
                         {/* About the Role */}
                         <div className="bg-white p-6 rounded-lg shadow-lg mb-6">
                             <h2 className="text-2xl font-semibold text-gray-800 mb-4">About the business and the role</h2>
-                            <p className="text-gray-700 mb-4">
-                                A well-established software company is currently redesigning its products and working towards consistently developing their software to always be ahead. They deliver high-quality HRIS systems both here in Australia and the US.
-                            </p>
+                            <p className="text-gray-700 mb-4">{job.description}</p>
                             <p className="text-gray-700">
                                 This re-design and exciting new vision has created the need for a brand new UI/UX Designer to assist in improving and designing a forward-thinking Front End experience for the user.
                             </p>
@@ -183,6 +134,3 @@ export default function ParticularJob({ params }) {
         </div>
     );
 }
-
-
-

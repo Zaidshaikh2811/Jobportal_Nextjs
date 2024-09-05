@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { FlipWordsDemo } from "../flipWords";
+import SearchJobHero from "../Helper/HeroSearch";
 
 export default function Hero() {
     return <div className="pt-[5rem] pb-[3rem]">
@@ -9,14 +10,7 @@ export default function Hero() {
                     <FlipWordsDemo />
                     <div className="mt-[1.5rem] flex justify-center lg:justify-start ">
                         <div className="flex w-full max-w-md mx-auto">
-                            <input
-                                type="text"
-                                placeholder="Search Job"
-                                className="w-full px-5 py-4 outline-none rounded-l-md bg-gray-200"
-                            />
-                            <button className="px-5 py-4 outline-none rounded-r-md bg-blue-500 text-white">
-                                Search
-                            </button>
+                            <SearchJobHero />
                         </div>
                     </div>
                 </div>

@@ -24,31 +24,31 @@ export default function ResponsiveNav() {
                     />
                 </Link>
                 <ul className="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6">
-                    <li><a className={`text-sm ${pathname === "/" ? "text-blue-600 font-bold" : "text-gray-400 hover:text-gray-500"}`} href="#">Home</a></li>
+                    <li><Link className={`text-sm ${pathname === "/" ? "text-blue-600 font-bold" : "text-gray-400 hover:text-gray-500"}`} href="/">Home</Link></li>
                     <li className="text-gray-300">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" className="w-4 h-4 current-fill" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
                         </svg>
                     </li>
-                    <li><a className={`text-sm ${pathname === "/aboutUs" ? "text-blue-600 font-bold" : "text-gray-400 hover:text-gray-500"}`} href="#">About Us</a></li>
+                    <li><Link className={`text-sm ${pathname === "/aboutUs" ? "text-blue-600 font-bold" : "text-gray-400 hover:text-gray-500"}`} href="/aboutUs">About Us</Link></li>
                     <li className="text-gray-300">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" className="w-4 h-4 current-fill" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
                         </svg>
                     </li>
-                    <li><a className={`text-sm ${pathname === "/job/alljobs" ? "text-blue-600 font-bold" : "text-gray-400 hover:text-gray-500"}`} href="/job/alljobs">All Jobs</a></li>
+                    <li><Link className={`text-sm ${pathname === "/job/alljobs" ? "text-blue-600 font-bold" : "text-gray-400 hover:text-gray-500"}`} href="/job/alljobs">All Jobs</Link></li>
                     <li className="text-gray-300">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" className="w-4 h-4 current-fill" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
                         </svg>
                     </li>
-                    <li><a className={`text-sm ${pathname === "/job/postjob" ? "text-blue-600 font-bold" : "text-gray-400 hover:text-gray-500"}`} href="/job/postjob">Post Job</a></li>
+                    <li><Link className={`text-sm ${pathname === "/job/postjob" ? "text-blue-600 font-bold" : "text-gray-400 hover:text-gray-500"}`} href="/job/postjob">Post Job</Link></li>
                     <li className="text-gray-300">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" className="w-4 h-4 current-fill" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
                         </svg>
                     </li>
-                    <li><a className={`text-sm ${pathname === "/contact" ? "text-blue-600 font-bold" : "text-gray-400 hover:text-gray-500"}`} href="#">Contact</a></li>
+                    <li><Link className={`text-sm ${pathname === "/contact" ? "text-blue-600 font-bold" : "text-gray-400 hover:text-gray-500"}`} href="/contact">Contact</Link></li>
                 </ul>
 
                 <div className=" lg:hidden">
